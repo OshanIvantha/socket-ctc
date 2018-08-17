@@ -53,11 +53,40 @@ public class CTCServer {
                 // Get messages from the client, line by line; return the response
                 while (true) {
                     String input = in.readLine();
-                    if (input == null  || input.equals(".")) {
+                    if (input == null) {
                         break;
                     }
 
-                    out.println(processRequest(input));
+                    // TODO : Validate the input
+
+                    int trackStatus = Integer.parseInt(input.substring(0, 1));
+                    int switchStatus = Integer.parseInt(input.substring(1, 2));
+
+                    System.out.println(trackStatus);
+                    System.out.println(switchStatus);
+
+                    if (trackStatus == 0) {
+                        if (switchStatus == 0) {
+                            out.println(1);
+                        } else if (switchStatus == 1) {
+                            out.println(2);
+                        }else{
+                            // Erroneous response
+                            out.println(-1);
+                        }
+                    } else if (trackStatus == 1) {
+                        if (switchStatus == 0) {
+                            // TODO
+                        } else if (switchStatus == 1) {
+                            // TODO
+                        }else{
+                            // Erroneous response
+                            out.println(-1);
+                        }
+                    }else{
+                        // Erroneous response
+                        out.println(-1);
+                    }
                 }
             } catch (IOException e) {
                 System.out.println("Error handling client# " + clientNumber + ": " + e);
@@ -69,32 +98,6 @@ public class CTCServer {
                 }
                 System.out.println("Connection with client# " + clientNumber + " closed");
             }
-        }
-
-        private int processRequest(String input) {
-
-            // TODO : Validate the input
-
-            int trackStatus = Integer.parseInt(input.substring(0, 1));
-            int switchStatus = Integer.parseInt(input.substring(1, 2));
-            System.out.println(trackStatus);
-            System.out.println(switchStatus);
-            if (trackStatus == 0) {
-                if (switchStatus == 0) {
-                    return 1;
-                } else if (switchStatus == 1) {
-                    return 2;
-                }
-            } else if (trackStatus == 1) {
-                if (switchStatus == 0) {
-                    // TODO
-                } else if (switchStatus == 1) {
-                    // TODO
-                }
-            }
-
-            // Erroneous response
-            return -1;
         }
     }
 

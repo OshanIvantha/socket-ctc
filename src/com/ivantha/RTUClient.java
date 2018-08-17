@@ -51,14 +51,13 @@ public class RTUClient {
                 String response;
                 try {
                     response = in.readLine();
-                    if (response == null || response.equals("-1")) {
+                    if (response == null) {
                         System.exit(0);
                     }
-                    System.out.println(response);
                 } catch (IOException ex) {
                     response = "Error: " + ex;
                 }
-                System.out.println("kkkkkk");
+
                 messageArea.append(response + "\n");
                 dataField.selectAll();
             }
